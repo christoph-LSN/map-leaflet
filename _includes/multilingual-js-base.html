@@ -13,7 +13,18 @@ var translations = {
     // their disaggregation data, we do it for them here.
     var originalKey = key;
     if (!key.includes('.') && this.data) {
-      key = 'data.' + key.toLowerCase();
+      // In this case we can immediately check the existence of the key and
+      // return the results without going further.
+      if (this.data[key]) {
+        return this.data[key];
+      }
+      // Also check lowercase.
+      key = key.toLowerCase();
+      if (this.data[key]) {
+        return this.data[key];
+      }
+      // Otherwise, we know nothing will be found, so just return the original.
+      return originalKey;
     }
 
     var drilled = this;
