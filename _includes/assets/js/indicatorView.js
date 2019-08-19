@@ -400,31 +400,49 @@ var indicatorView = function (model, options) {
     this.createSourceButton(chartInfo.shortIndicatorId, '#selectionsChart');
 
     $("#btnSave").click(function() {
-        html2canvas($("#chart-canvas"), {
-          onrendered: function(canvas) {
-            saveAs(canvas.toDataURL(), chartInfo.indicatorId+'.png');
+      var filename = chartInfo.indicatorId + '.png',
+          element = document.getElementById('chart-canvas'),
+          height = element.clientHeight + 25,
+          width = element.clientWidth + 25;
+      var options = {
+        // These options fix the height, width, and position.
+        height: height,
+        width: width,
+        windowHeight: height,
+        windowWidth: width,
+        x: 0,
+        y: 0,
+        scrollX: 0,
+        scrollY: 0,
+        // Allow a chance to alter the screenshot's HTML.
+        onclone: function(clone) {
+          // Add a body class so that the screenshot style can be custom.
+          clone.body.classList.add('image-download-in-progress');
+        },
+        // Decide which elements to skip.
+        ignoreElements: function(el) {
+          // Keep all style, head, and link elements.
+          var keepTags = ['STYLE', 'HEAD', 'LINK'];
+          if (keepTags.indexOf(el.tagName) !== -1) {
+            return false;
           }
+          // Keep all elements contained by (or containing) the screenshot
+          // target element.
+          if (element.contains(el) || el.contains(element)) {
+            return false;
+          }
+          // Leave out everything else.
+          return true;
+        }
+      };
+      // First convert the target to a canvas.
+      html2canvas(element, options).then(function(canvas) {
+        // Then download that canvas as a PNG file.
+        canvas.toBlob(function(blob) {
+          saveAs(blob, filename);
         });
       });
-
-    function saveAs(uri, filename) {
-      var link = document.createElement('a');
-      if (typeof link.download === 'string') {
-        link.href = uri;
-        link.download = filename;
-
-        //Firefox requires the link to be in the body
-        document.body.appendChild(link);
-
-        //simulate click
-        link.click();
-
-        //remove the link when done
-        document.body.removeChild(link);
-        } else {
-        window.open(uri);
-        }
-        }
+    });
 
     $(this._legendElement).html(view_obj._chartInstance.generateLegend());
   };
