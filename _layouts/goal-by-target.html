@@ -32,7 +32,11 @@
     </div>
   </div>
 
-  {% assign goal_indicators = site.data.meta | where: 'sdg_goal', goal_number | sort: 'indicator_sort_order' | group_by: 'target_id' %}
+  {% if site.translated_builds %}
+    {% assign goal_indicators = site.data[current_language].meta | where: 'sdg_goal', goal_number | sort: 'indicator_sort_order' | group_by: 'target_id' %}
+  {% else %}
+    {% assign goal_indicators = site.data.meta | where: 'sdg_goal', goal_number | sort: 'indicator_sort_order' | group_by: 'target_id' %}
+  {% endif %}
   {% for group in goal_indicators %}
     {% assign target_id = group.name %}
     {% assign target_id_dashes = target_id | replace: ".", "-" %}

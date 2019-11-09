@@ -23,7 +23,11 @@
   {{ content }}
   {% include components/breadcrumb.html %}
 
-  {% assign goal_indicators = site.data.meta | where: 'sdg_goal', page.sdg_goal | sort: 'indicator_sort_order' %}
+  {% if site.translated_builds %}
+    {% assign goal_indicators = site.data[current_language].meta | where: 'sdg_goal', goal_number | sort: 'indicator_sort_order' | group_by: 'target_id' %}
+  {% else %}
+    {% assign goal_indicators = site.data.meta | where: 'sdg_goal', goal_number | sort: 'indicator_sort_order' | group_by: 'target_id' %}
+  {% endif %}
   {% for indicator in goal_indicators %}
 
     {% assign status_css = indicator.reporting_status | slugify %}
