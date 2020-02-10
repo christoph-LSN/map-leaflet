@@ -540,6 +540,7 @@ var indicatorView = function (model, options) {
 
   this.createDownloadButton = function(table, name, indicatorId, el) {
     if(window.Modernizr.blobconstructor) {
+      console.log('blobconstructor');
       var downloadKey = 'download_csv';
       if (name == 'Chart') {
         downloadKey = 'download_chart';
@@ -561,6 +562,7 @@ var indicatorView = function (model, options) {
       })
       .data('csvdata', this.toCsv(table)));
     } else {
+      console.log('no blobconstructor');
       var headlineId = indicatorId.replace('indicator', 'headline');
       var id = indicatorId.replace('indicator_', '');
       var gaLabel = 'Download Headline CSV: ' + id;
