@@ -9,6 +9,17 @@ $h2-fontSize: 27px !default;
 $h3-fontSize: 24px !default;
 $leadCopy-fontSize: 22px !default;
 
+$backToTop-fontSize: 3rem !default;
+$disclaimer-text-fontSize-mobile: 0.75em !default;
+
+$status-fontSize: 16px !default;
+$status-total-fontSize: 16px !default;
+
 // Component-level typography variables.
 // [component] - [element] - [fontSize|fontWeight|etc] - [...modifiers]
 $searchBar-input-fontSize: 16px !default;
+$search-resultTitle-fontSize: 18px !default;
+$search-resultURL-fontSize: 16px !default;
+
+$menu-link-fontSize: 16px !default;
+$menu-link-fontSize-mobile: 15px !default;

@@ -56,7 +56,7 @@ header {
         padding: 2px;
         margin: 2px 15px;
         color: $menu-link-color;
-        font-size: 16px;
+        font-size: $menu-link-fontSize;
 
       }
 
@@ -237,7 +237,7 @@ header {
           background: $menu-link-backgroundColor-mobile-active;
           padding: 6px 0 6px;
           color: $menu-link-color-mobile;
-          font-size: 15px;
+          font-size: $menu-link-fontSize-mobile;
 
           &:hover {
             color: $menu-link-color-mobile;

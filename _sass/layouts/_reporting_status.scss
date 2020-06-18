@@ -34,7 +34,7 @@
 
         width: 40px;
         text-align: center;
-        font-size: 16px;
+        font-size: $status-fontSize;
 
         &.notstarted{
           border: 1px solid $color-dark;
@@ -81,7 +81,7 @@
     .total {
        line-height: 24px;
        vertical-align: middle;
-       font-size: 16px;
+       font-size: $status-total-fontSize;
        width: auto;
        padding-left: 4px;
        padding-right: 4px;

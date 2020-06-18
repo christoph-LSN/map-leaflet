@@ -20,11 +20,11 @@
       margin-top: 10px;
       .title {
         margin-bottom: 5px;
-        font-size: 18px;
+        font-size: $search-resultTitle-fontSize;
       }
       .url {
         color: $search-resultURL-color;
-        font-size: 16px;
+        font-size: $search-resultURL-fontSize;
       }
       &:hover {
         .title {
