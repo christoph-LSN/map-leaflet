@@ -39,6 +39,17 @@ function getDatasets(headline, data, combinations, years, defaultLabel, colors, 
       datasets.push(dataset);
       index++;
     }
+    else {
+      color = getHeadlineColor();
+      background = color;
+      border = [5, 5];
+      var normalLabel = getCombinationDescription(combination, defaultLabel);
+      if (typeof translations.indicator.data_not_available_short === 'undefined') {
+        translations.indicator.data_not_available_short = 'no data';
+      }
+      dataset = makeDataset(years, filteredData, {}, normalLabel + ' - ' + translations.indicator.data_not_available_short, color, background, border);
+      datasets.push(dataset);
+    }
   }, this);
   datasets.sort(function(a, b) { return a.label > b.label; });
   if (headline.length > 0) {
