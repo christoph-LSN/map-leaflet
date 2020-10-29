@@ -1,6 +1,8 @@
-<h1>Configuration</h1>
+<h1>Site configuration</h1>
 
 In addition to the [usual Jekyll configuration options](https://jekyllrb.com/docs/configuration/), there are many options specific to Open SDG. These are detailed below, along with usage examples. **All of these settings go in the `_config.yml` file.** Alternatively, you can add any/all of these settings to a `site_config.yml` file in your data folder (usually `data/site_config.yml`).
+
+This document covers the "site configuration", which is distinct from "data configuration". See more [details on data configuration](data-configuration.md).
 
 _Note about "strings": Many of the settings detailed here contain human-readable "strings" (ie, text). In most cases, they can be replaced by [translation keys](translation.md) for better multilingual support. For example, "Indicator" could be replaced with "general.indicator"._
 
@@ -161,11 +163,12 @@ NOTE: This approach is deprecated. It is recommended to instead [put your custom
 
 ### custom_js
 
-_Optional_: This setting can be used to load additional JavaScript files on each page. It should be a list of relative paths to JavaScript files.
+_Optional_: This setting can be used to load additional JavaScript files on each page. It should be a list of relative paths to JavaScript files, or remote paths to third-party Javascript files.
 
 ```
 custom_js:
   - /assets/js/custom.js
+  - https://example.com/index.js
 ```
 
 ### data_edit_url
@@ -261,6 +264,8 @@ footer_menu:
   - path: /cookies
     translation_key: menu.cookies
 ```
+
+Note that the `path` of an item can be a translation key itself. This is useful if you want the link to go to different URLs depending on what language is active (for example if you have multiple language-specific Twitter accounts).
 
 ### frontpage_cards
 

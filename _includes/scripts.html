@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.js"></script>
 {% if page.indicator and page.indicator.graph_annotations %}
 <script src="//cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js" integrity="sha512-9hzM/Gfa9KP1hSBlq3/zyNF/dfbcjAYwUTBWYX+xi8fzfAPHL3ILwS1ci0CTVeuXTGkRAWgRMZZwtSNV7P+nfw==" crossorigin="anonymous"></script>
-{% endif %}}
+{% endif %}
 {% if page.indicator and page.indicator.data_show_map %}
 <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet.zoomshowhide@0.1.0/dist/leaflet-zoom-show-hide.min.js"></script>
@@ -26,9 +26,15 @@
 {% include multilingual-js.html key="general.hide" %}
 {% include multilingual-js.html key="search.search" %}
 <script src='{{ site.baseurl }}/assets/js/sdg.js?v={{ cache_bust }}'></script>
+{% include scripts-custom.html %}
 {%- if site.custom_js -%}
   {%- for custom_js_file in site.custom_js -%}
-    <script src="{{ site.baseurl }}{{ custom_js_file }}?v={{ cache_bust }}"></script>
+    {% assign script_src = custom_js_file %}
+    {% assign src_start = script_src | slice: 0, 4 %}
+    {% if src_start != 'http' %}
+      {%- assign script_src = site.baseurl | append: script_src | append: "?v=" | append: cache_bust %}
+    {% endif %}
+    <script src="{{ script_src }}"></script>
   {%- endfor -%}
 {%- endif -%}
 <script>
