@@ -92,6 +92,8 @@
     getCombinationData: getCombinationData,
     getDatasets: getDatasets,
     tableDataFromDatasets: tableDataFromDatasets,
+    getValuesWithDataByField: getValuesWithDataByField,
+    updateAvailableFieldValues: updateAvailableFieldValues,
     // Backwards compatibility.
     footerFields: deprecated('helpers.footerFields'),
   }

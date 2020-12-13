@@ -214,6 +214,29 @@ var indicatorModel = function (options) {
       });
     }
 
+    if (selectionUpdateNeeded || options.unitsChangeSeries) {
+      this.updateFieldStates(this.selectedFields);
+    }
+
+    var filteredData = this.data;
+    if (this.hasUnits) {
+      filteredData = helpers.getDataByUnit(filteredData, this.selectedUnit);
+    }
+    if (this.hasSerieses) {
+      filteredData = helpers.getDataBySeries(filteredData, this.selectedSeries);
+    }
+    if (this.hasUnits || this.hasSerieses) {
+      var valuesWithDataByField = helpers.getValuesWithDataByField(filteredData, this.allowedFields);
+      helpers.updateAvailableFieldValues(this.fieldItemStates, valuesWithDataByField);
+    }
+
+    filteredData = helpers.getDataBySelectedFields(filteredData, this.selectedFields);
+
+    filteredData = helpers.sortData(filteredData, this.selectedUnit);
+    if (headline.length > 0) {
+      headline = helpers.sortData(headline, this.selectedUnit);
+    }
+
     if (options.initial || options.updateFields) {
       this.onFieldsComplete.notify({
         fields: helpers.fieldItemStatesForView(
@@ -233,23 +256,6 @@ var indicatorModel = function (options) {
         indicatorId: this.indicatorId,
         showMap: this.showMap,
       });
-    }
-
-    if (selectionUpdateNeeded || options.unitsChangeSeries) {
-      this.updateFieldStates(this.selectedFields);
-    }
-
-    var filteredData = helpers.getDataBySelectedFields(this.data, this.selectedFields);
-    if (this.hasUnits) {
-      filteredData = helpers.getDataByUnit(filteredData, this.selectedUnit);
-    }
-    if (this.hasSerieses) {
-      filteredData = helpers.getDataBySeries(filteredData, this.selectedSeries);
-    }
-
-    filteredData = helpers.sortData(filteredData, this.selectedUnit);
-    if (headline.length > 0) {
-      headline = helpers.sortData(headline, this.selectedUnit);
     }
 
     var combinations = helpers.getCombinationData(this.selectedFields);
