@@ -80,6 +80,14 @@ breadcrumbs:
 
 Note that `indicator` will automatically add a final item, which is a link to the goal that the indicator belongs to. You do not need to specify this, since it is done dynamically and automatically.
 
+### configuration_edit_url
+
+_Optional_: This setting controls the URL of the "Edit Configuration" that appear on the staging site's indicator pages. It should be a full URL. Note that you can include `[id]` in the URL, and it will be dynamically replaced with the indicator's id (dash-delimited).
+
+```nohighlight
+configuration_edit_url: http://prose.io/#my-org/my-repo/edit/develop/indicator-settings/[id].md
+```
+
 ### contrast_type
 
 _Optional_: This setting allows you to change the type of contrast button your site uses. By default there are two buttons containing 'A'. If you use this option one single button will be displayed with the text 'High contrast' / 'Default contrast', depending on which mode of contrast is active.
@@ -100,22 +108,14 @@ country:
 
 ### create_config_forms
 
-_Optional_: This setting can be used to automatically create the configuration form pages. Without this setting, you will need to maintain your site and indicator configuration using a text editor. This setting should include another (indented) setting indicating the Jekyll layout to use for the config form pages (usually `config-builder`). After setting this, you will have a site configuration form available through a link in the footer, as well as indicator configuration forms available in the "Edit" tab.
+_Optional_: This setting can be used to automatically create the configuration form pages. Without this setting, you will need to maintain your site and indicator configuration using a text editor. This setting should include another (indented) setting indicating the Jekyll layout to use for the config form pages (usually `config-builder`). After setting this, you will have a site configuration form available through a link in the footer, as well as indicator configuration and metadata forms available in the "Edit" tab.
 
 ```nohighlight
 create_config_forms:
   layout: config-builder
 ```
 
-To also have config forms for metadata, you can specify the "scopes" of the metadata that should get a config form. Each scope will have its own form. These correspond to the "scope" in the schema from the data repository(eg, _prose.yml file). For example:
-
-```nohighlight
-create_config_forms:
-  layout: config-builder
-  metadata_scopes:
-    - scope: national
-      label: National metadata
-```
+To configure the behavior of these forms, see the separate `site_config_form`, `indicator_config_form`, and `indicator_metadata_form` settings.
 
 ### create_goals
 
@@ -487,6 +487,19 @@ _Optional_: This setting controls the behavior of the indicator config forms. Th
               - complete
               - notstarted
 
+* `repository_link`: This will display a "Go to repository" link on the configuration page. You can enter a pattern with `[id]` and it will be replaced with the indicator id (eg, 1-1-1). For example, on indicator 1-1-1, `https://example.com/[id]` will link to `https://example.com/1-1-1`.
+* `translation_link`: This will display a  "Go to translation" link beneath each metadata field. You can enter a pattern with `[id]` and/or `[field]` and it will be replaced as described above.
+
+### indicator_metadata_form
+
+_Optional_: This setting controls the behavior of the indicator metadata forms. The available settings are the same as in  `indicator_config_form` above, plus the following extra options:
+
+* `scopes`: A list of the "scopes" that you would like to include in the form. If let blank, this will default to "national" and "global".
+* `exclude_fields`: A list of the fields that you would like to omit from the form.
+  - national
+  - global
+```
+
 ### languages
 
 **_Required_**: This setting controls the languages to be used on the site. This should be a list of language codes, and the first is assumed to be the default.
@@ -676,9 +689,7 @@ series_toggle: true
 
 ### site_config_form
 
-_Optional_: This setting controls the behavior of the site config form. The available settings are:
-
-* `dropdowns`: This works the same as in the `indicator_config_form` setting.
+_Optional_: This setting controls the behavior of the site config form. The available the same as in the `indicator_config_form` described above.
 
 ### sharethis_property
 
