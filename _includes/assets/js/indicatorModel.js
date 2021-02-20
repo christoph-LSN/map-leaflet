@@ -44,6 +44,7 @@ var indicatorModel = function (options) {
   this.graphAnnotations = options.graphAnnotations;
   this.indicatorDownloads = options.indicatorDownloads;
   this.compositeBreakdownLabel = options.compositeBreakdownLabel;
+  this.precision = options.precision;
 
   this.initialiseUnits = function() {
     if (this.hasUnits) {
@@ -259,6 +260,7 @@ var indicatorModel = function (options) {
         hasGeoData: this.hasGeoData,
         indicatorId: this.indicatorId,
         showMap: this.showMap,
+        precision: helpers.getPrecision(this.precision, this.selectedUnit, this.selectedSeries),
       });
     }
 
@@ -304,11 +306,12 @@ var indicatorModel = function (options) {
       shortIndicatorId: this.shortIndicatorId,
       selectedUnit: this.selectedUnit,
       selectedSeries: this.selectedSeries,
-      graphLimits: this.graphLimits,
+      graphLimits: helpers.getGraphLimits(this.graphLimits, this.selectedUnit, this.selectedSeries),
       stackedDisaggregation: this.stackedDisaggregation,
       graphAnnotations: this.graphAnnotations,
       chartTitle: this.chartTitle,
       indicatorDownloads: this.indicatorDownloads,
+      precision: helpers.getPrecision(this.precision, this.selectedUnit, this.selectedSeries),
     });
   };
 };
