@@ -425,6 +425,7 @@ var indicatorView = function (model, options) {
             maxBarThickness: 150,
             gridLines: {
               color: gridColor,
+              drawOnChartArea: false,
             },
             ticks: {
               fontColor: tickColor,
