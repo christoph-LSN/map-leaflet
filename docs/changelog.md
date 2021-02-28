@@ -1,5 +1,10 @@
 <h1>Change Log</h1>
 
+## Unreleased
+
+* New 'accessible' color-set option for optimal contrast #1103
+* Fix support for indicator ID searches in all languages #1110
+
 ## 1.2.0
 
 * Tweak page-content styles for goal pages #1034
