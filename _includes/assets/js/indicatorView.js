@@ -331,6 +331,11 @@ var indicatorView = function (model, options) {
   };
 
   this.alterTableConfig = function(config, info) {
+    // deprecated start
+    if (typeof opensdg.tableConfigAlterations === 'undefined') {
+      opensdg.tableConfigAlterations = [];
+    }
+    // deprecated end
     opensdg.tableConfigAlterations.forEach(function(callback) {
       callback(config, info);
     });
@@ -338,7 +343,7 @@ var indicatorView = function (model, options) {
 
   this.alterDataDisplay = function(value, info, context) {
     // If value is empty, we will not alter it.
-    if (value == null) {
+    if (value == null || value == undefined) {
       return value;
     }
     // Before passing to user-defined dataDisplayAlterations, let's
@@ -348,10 +353,15 @@ var indicatorView = function (model, options) {
       altered = Number(value);
     }
     // If that gave us a non-number, return original.
-    if (Number.isNaN(altered)) {
+    if (isNaN(altered)) {
       return value;
     }
     // Now go ahead with user-defined alterations.
+    // @deprecated start
+    if (typeof opensdg.dataDisplayAlterations === 'undefined') {
+      opensdg.dataDisplayAlterations = [];
+    }
+    // @deprecated end
     opensdg.dataDisplayAlterations.forEach(function(callback) {
       altered = callback(altered, info, context);
     });
@@ -472,18 +482,14 @@ var indicatorView = function (model, options) {
         title: {
           display: false
         },
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItems, data) {
-              return tooltipItems.label + ': ' + view_obj.alterDataDisplay(tooltipItems.yLabel, data, 'chart tooltip');
-            },
-          },
-        },
         plugins: {
           scaler: {}
         },
         tooltips: {
           callbacks: {
+            label: function(tooltipItems, data) {
+              return data.datasets[tooltipItems.datasetIndex].label + ': ' + view_obj.alterDataDisplay(tooltipItems.yLabel, data, 'chart tooltip');
+            },
             afterBody: function() {
               var unit = view_obj._model.selectedUnit ? translations.t(view_obj._model.selectedUnit) : view_obj._model.measurementUnit;
               if (typeof unit !== 'undefined' && unit !== '') {
@@ -586,7 +592,7 @@ var indicatorView = function (model, options) {
   };
 
   this.getHeadlineColor = function(contrast) {
-    return this.isHighContrast(contrast) ? '#FFDD00' : '#004466'
+    return this.isHighContrast(contrast) ? '{{ site.graph_color_headline_high_contrast | default: "#FFDD00" }}' : '{{ site.graph_color_headline | default: "#00006a" }}';
   }
 
   this.getGridColor = function(contrast) {
@@ -928,7 +934,7 @@ var indicatorView = function (model, options) {
           var isYear = (index == 0);
           var cell_prefix = (isYear) ? '<th scope="row"' : '<td';
           var cell_suffix = (isYear) ? '</th>' : '</td>';
-          row_html += cell_prefix + (isYear ? '' : ' class="table-value"') + '>' + (data[index] !== null ? data[index] : '-') + cell_suffix;
+          row_html += cell_prefix + (isYear ? '' : ' class="table-value"') + '>' + (data[index] !== null && data[index] !== undefined ? data[index] : '-') + cell_suffix;
         });
         row_html += '</tr>';
         currentTable.find('tbody').append(row_html);
