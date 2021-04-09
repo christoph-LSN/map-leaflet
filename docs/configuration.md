@@ -413,17 +413,28 @@ goals_page:
 
 As always, for multilingual support, these settings can refer to translation keys, and the description can include Markdown.
 
+### graph_color_headline
+
+_Optional_: This setting can be used to control the color of the "headline" (eg, the national dataset, without any disaggregations selected) on charts. The default is #004466.
+
+### graph_color_headline_high_contrast
+
+_Optional_: This setting can be used to control the color of the "headline" (eg, the national dataset, without any disaggregations selected) on charts, in high-contrast mode. The default is #55a6e5.
+
 ### graph_color_set
 
-_Optional_: This setting can be used to customize the color set used in the charts. There are four possible entries:
-Use `graph_color_set: 'default'` for using the 6 default colors,
-`graph_color_set: 'sdg'` to use the 17 SDG colors in all charts,
-`graph_color_set: 'goal'` to use shades of the color of the current indicator's goal,
-`graph_color_set: 'custom'` to use a set of customized colors. In this case, write the hexadecimal color codes of the colors you want to use to the list in `graph_color_list` (see below).
+_Optional_: This setting can be used to customize the color set used in the charts. There are five possible entries:
+
+* `graph_color_set: 'accessible'` a 6-color set that is specifically chosen for optimal accessibility (recommended)
+* `graph_color_set: 'default'` a deprecated 6-color set that is still the default (for reasons of backwards compatibility)
+* `graph_color_set: 'sdg'` to use the 17 SDG colors in all charts
+* `graph_color_set: 'goal'` to use shades of the color of the current indicator's goal
+* `graph_color_set: 'custom'` to use a set of customized colors. In this case, write the hexadecimal color codes of the colors you want to use to the list in `graph_color_list` (see below).
 
 > **NOTE**: Whatever color scheme you choose here, please ensure that all colors satisfy
 > the accessibility (minimum contrast) standards in your region. These colors will need to
-> be visible on white and black backgrounds.
+> be visible on white and black backgrounds. The `accessible` color scheme is designed to
+> meet this requirement, and so it is recommended.
 
 ### graph_color_list
 
@@ -446,10 +457,12 @@ Here is an example, showing the default that is used if this setting is omitted:
 
 ```nohighlight
 header:
-    include: default.html
+    include: header-default.html
 ```
 
-The configuration above will include the file `_includes/components/header/default.html` at the top of each page.
+The configuration above will include the file `_includes/components/header/header-default.html` at the top of each page.
+
+The `header-menu-left-aligned.html` option is also available, and is recommended.
 
 ### header_language_toggle
 
@@ -531,6 +544,28 @@ _Optional_: This setting can be used if you are not happy with any of the standa
 languages_public:
   - language: xyz
     language_public: abc
+```
+
+### logos
+
+_Optional_: Normally Open SDG uses a logo at `assets/img/SDG_logo.png`, with the alt text of "Sustainable Development Goals - 17 Goals to Transform our World". However you can use this setting to take full control of the logo and alt text:
+
+```nohighlight
+logos:
+  - src: assets/img/my-other-image-file.png
+    alt: My other alt text
+```
+
+You can also specify multiple logos, one per language:
+
+```nohighlight
+logos:
+  - language: en
+    src: assets/img/en/logo.png
+    alt: my alt text
+  - language: es
+    src: assets/img/es/logo.png
+    alt: mi texto alternativo
 ```
 
 ### metadata_edit_url
