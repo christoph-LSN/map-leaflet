@@ -19,6 +19,7 @@ breadcrumbs:
     - path: /news
       label: menu.updates
 configuration_edit_url: config
+graph_title_from_series: true
 country:
   name: Australia
   adjective: Australian
