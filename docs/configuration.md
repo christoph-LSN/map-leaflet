@@ -43,7 +43,7 @@ breadcrumbs:
     - label: Home
       path: /
     - label: Updates
-      path: /news
+      path: news/
 ```
 
 Or with the addition of translation keys for multilingual sites:
@@ -54,7 +54,7 @@ breadcrumbs:
     - label: general.home
       path: /
     - label: menu.updates
-      path: /news
+      path: news/
 ```
 
 Here is a full exmaple including `goal` and `indicator` as well:
@@ -65,20 +65,28 @@ breadcrumbs:
     - label: general.home
       path: /
     - label: menu.updates
-      path: /news
+      path: news/
   goal:
     - label: general.home
       path: /
     - label: general.goals
-      path: /goals
+      path: goals/
   indicator:
     - label: general.home
       path: /
     - label: general.goals
-      path: /goals
+      path: goals/
 ```
 
 Note that `indicator` will automatically add a final item, which is a link to the goal that the indicator belongs to. You do not need to specify this, since it is done dynamically and automatically.
+
+### configuration_edit_url
+
+_Optional_: This setting controls the URL of the "Edit Configuration" that appear on the staging site's indicator pages. It should be a full URL. Note that you can include `[id]` in the URL, and it will be dynamically replaced with the indicator's id (dash-delimited).
+
+```nohighlight
+configuration_edit_url: http://prose.io/#my-org/my-repo/edit/develop/indicator-settings/[id].md
+```
 
 ### contrast_type
 
@@ -96,15 +104,6 @@ contrast_type: long
 country:
   name: Australia
   adjective: Australian
-```
-
-### create_config_forms
-
-_Optional_: This setting can be used to automatically create the configuration form pages. Without this setting, you will need to maintain your site and indicator configuration using a text editor. This setting should include another (indented) setting indicating the Jekyll layout to use for the config form pages (usually `config-builder`). After setting this, you will have a site configuration form available through a link in the footer, as well as indicator configuration forms available in the "Edit" tab.
-
-```nohighlight
-create_config_forms:
-  layout: config-builder
 ```
 
 ### create_goals
@@ -302,9 +301,9 @@ footer_menu:
     translation_key: general.twitter
   - path: https://facebook.com/MyFacebookAccount
     translation_key: general.facebook
-  - path: /faq
+  - path: faq/
     translation_key: menu.faq
-  - path: /cookies
+  - path: cookies/
     translation_key: menu.cookies
 ```
 
@@ -414,6 +413,14 @@ goals_page:
 
 As always, for multilingual support, these settings can refer to translation keys, and the description can include Markdown.
 
+### graph_color_headline
+
+_Optional_: This setting can be used to control the color of the "headline" (eg, the national dataset, without any disaggregations selected) on charts. The default is #004466.
+
+### graph_color_headline_high_contrast
+
+_Optional_: This setting can be used to control the color of the "headline" (eg, the national dataset, without any disaggregations selected) on charts, in high-contrast mode. The default is #55a6e5.
+
 ### graph_color_set
 
 _Optional_: This setting can be used to customize the color set used in the charts. There are five possible entries:
@@ -450,10 +457,12 @@ Here is an example, showing the default that is used if this setting is omitted:
 
 ```nohighlight
 header:
-    include: default.html
+    include: header-default.html
 ```
 
-The configuration above will include the file `_includes/components/header/default.html` at the top of each page.
+The configuration above will include the file `_includes/components/header/header-default.html` at the top of each page.
+
+The `header-menu-left-aligned.html` option is also available, and is recommended.
 
 ### header_language_toggle
 
@@ -475,6 +484,7 @@ hide_empty_metadata: true
 
 _Optional_: This setting controls the behavior of the indicator config forms. The available settings are:
 
+* `enabled`: Whether or not to generate these configuration forms
 * `dropdowns`: This can be used to convert any `string` field into a dropdown. Each item should have these properties:
 
     * `jsonschema`: The path into the jsonschema's `properties` object, to the property that you would like to convert into a dropdown. In most cases this is simply the name of the property, but in nested situations, you can use dot-syntax to drill down into the jsonschema object.
@@ -489,6 +499,32 @@ _Optional_: This setting controls the behavior of the indicator config forms. Th
             values:
               - complete
               - notstarted
+
+* `repository_link`: This will display a "Go to repository" link on the configuration page. You can enter a pattern with `[id]` and it will be replaced with the indicator id (eg, 1-1-1). For example, on indicator 1-1-1, `https://example.com/[id]` will link to `https://example.com/1-1-1`.
+* `translation_link`: This will display a  "Go to translation" link beneath each metadata field. You can enter a pattern with `[id]` and/or `[field]` and it will be replaced as described above.
+
+Links to the forms appear in the "Edit" tab on indicator pages.
+
+### indicator_metadata_form
+
+_Optional_: This setting controls the behavior of the indicator metadata forms. The available settings are the same as in  `indicator_config_form` above, plus the following extra options:
+
+* `scopes`: A list of the "scopes" that you would like to include in the form. If let blank, this will default to "national" and "global".
+* `exclude_fields`: A list of the fields that you would like to omit from the form.
+
+For example:
+
+```
+indicator_metadata_form:
+  enabled: true
+  scopes:
+    - national
+    - global
+  exclude_fields:
+    - my_excluded_field_name
+```
+
+Links to the forms appear in the "Edit" tab on indicator pages.
 
 ### languages
 
@@ -508,6 +544,28 @@ _Optional_: This setting can be used if you are not happy with any of the standa
 languages_public:
   - language: xyz
     language_public: abc
+```
+
+### logos
+
+_Optional_: Normally Open SDG uses a logo at `assets/img/SDG_logo.png`, with the alt text of "Sustainable Development Goals - 17 Goals to Transform our World". However you can use this setting to take full control of the logo and alt text:
+
+```nohighlight
+logos:
+  - src: assets/img/my-other-image-file.png
+    alt: My other alt text
+```
+
+You can also specify multiple logos, one per language:
+
+```nohighlight
+logos:
+  - language: en
+    src: assets/img/en/logo.png
+    alt: my alt text
+  - language: es
+    src: assets/img/es/logo.png
+    alt: mi texto alternativo
 ```
 
 ### metadata_edit_url
@@ -545,25 +603,25 @@ While the "scopes" above, such as "national" and "global", are arbitrary, the "s
 
 ```nohighlight
 menu:
-  - path: /reporting-status
+  - path: reporting-status/
     translation_key: menu.reporting_status
-  - path: /about
+  - path: about/
     translation_key: menu.about
-  - path: /faq
+  - path: faq/
     translation_key: menu.faq
 ```
 
-Menu items can also be turned into dropdowns by putting additional menu items under a `dropdown` setting. For example, this would move "/about" and "/faq" under a "More information" dropdown:
+Menu items can also be turned into dropdowns by putting additional menu items under a `dropdown` setting. For example, this would move "about/" and "faq/" under a "More information" dropdown:
 
 ```nohighlight
 menu:
-  - path: /reporting-status
+  - path: reporting-status/
     translation_key: menu.reporting_status
   - translation_key: More information
     dropdown:
-      - path: /faq
+      - path: faq/
         translation_key: menu.faq
-      - path: /about
+      - path: about/
         translation_key: menu.about
 ```
 
@@ -693,9 +751,9 @@ series_toggle: true
 
 ### site_config_form
 
-_Optional_: This setting controls the behavior of the site config form. The available settings are:
+_Optional_: This setting controls the behavior of the site config form. The available the same as in the `indicator_config_form` described above.
 
-* `dropdowns`: This works the same as in the `indicator_config_form` setting.
+The default location for the site configuration page is `/config`.
 
 ### sharethis_property
 

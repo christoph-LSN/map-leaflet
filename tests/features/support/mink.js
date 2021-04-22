@@ -1,4 +1,4 @@
-const cucumber = require('cucumber');
+const cucumber = require('@cucumber/cucumber');
 const mink = require('cucumber-mink');
 
 const driver = new mink.Mink({
@@ -11,6 +11,7 @@ const driver = new mink.Mink({
     "the Table tab": "#tab-tableview",
     "the Chart tab": "#tab-chartview",
     "the Map tab": "#tab-mapview",
+    "the Edit tab": "#tab-edit",
     "sortable table": "#tableview table",
     "visual chart": "#chartview canvas",
     "map": "#mapview #map.leaflet-container",
@@ -57,6 +58,8 @@ const driver = new mink.Mink({
     "table has no data": "#selectionsTable.table-has-no-data h3",
     "chart has no data": "#selectionsChart.chart-has-no-data canvas",
     "breadcrumbs": ".breadcrumb",
+    "table value": "#tableview tbody .table-value",
+    "main logo": ".navbar-brand img",
   }
 });
 
