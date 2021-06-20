@@ -1,7 +1,7 @@
 ﻿accessible_charts: true
 accessible_tabs: true
 analytics:
-  ga_prod: ''
+  ga_prod: 'foo'
 breadcrumbs:
   goal:
     - path: /
@@ -19,6 +19,8 @@ breadcrumbs:
     - path: /news
       label: menu.updates
 configuration_edit_url: config
+cookie_consent_form:
+  enabled: true
 country:
   name: Australia
   adjective: Australian

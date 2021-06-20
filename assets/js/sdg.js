@@ -28,3 +28,5 @@
 {%- include assets/js/plugins/leaflet.fullscreenAccessible.js -%}
 {%- include assets/js/plugins/leaflet.searchAccessible.js -%}
 {%- include assets/js/backToTop.js -%}
+
+{%- include assets/js/cookies-uk.js -%}

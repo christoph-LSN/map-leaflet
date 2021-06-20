@@ -1,3 +1,21 @@
 .cookie-settings {
     cursor: pointer;
 }
+
+.cookie-notice {
+    margin-top: -15px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    background: #f3f2f1 url("../img/sdgbg.png") bottom left repeat-x;
+
+    .btn, .view-cookies-link {
+        @media only screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+    .view-cookies-link {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: 1em;
+    }
+}

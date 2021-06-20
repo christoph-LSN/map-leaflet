@@ -4,7 +4,7 @@ var klaroConfig = {
     styling: {
         theme: ['light', 'top', 'wide'],
     },
-    noAutoLoad: false,
+    noAutoLoad: true, // testing
     htmlTexts: false,
     embedded: false,
     groupByPurpose: true,
@@ -37,11 +37,7 @@ var klaroConfig = {
             cookies: ['_gat', '_gid', 'ga'],
             callback: function(consent, service) {
                 if (consent) {
-                    console.log('Sending analytics.');
                     initialiseGoogleAnalytics();
-                }
-                else {
-                    console.log('No analytics will be sent.');
                 }
             },
             required: false,
