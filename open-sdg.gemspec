@@ -11,5 +11,5 @@ Gem::Specification.new do |spec|
     f.match(%r!^(assets|_(includes|layouts|sass)/|(LICENSE|README)((\.(txt|md|markdown)|$)))!i)
   end
   spec.add_dependency "jekyll", "~> 3.0"
-  spec.add_dependency "jekyll-open-sdg-plugins", "~> 1.2.0"
+  #spec.add_dependency "jekyll-open-sdg-plugins", "~> 1.2.0"
 end
