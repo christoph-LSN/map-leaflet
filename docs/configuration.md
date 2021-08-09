@@ -90,10 +90,16 @@ configuration_edit_url: http://prose.io/#my-org/my-repo/edit/develop/indicator-s
 
 ### contrast_type
 
-_Optional_: This setting allows you to change the type of contrast button your site uses. By default there are two buttons containing 'A'. If you use this option one single button will be displayed with the text 'High contrast' / 'Default contrast', depending on which mode of contrast is active.
+_Optional_: This setting allows you to change the type of contrast button your site uses. The available settings are:
+
+* `default`: Two buttons containing "A" - one for on and one for off (this is the default if you omit this setting)
+* `long`: If you use this option one single button will be displayed with the text 'High contrast' / 'Default contrast', depending on which mode of contrast is active.
+* `single`: One button containing "A" which toggles on/off, depending on which mode of contrast is active. This is recommended for the cleanest display.
+
+Example:
 
 ```nohighlight
-contrast_type: long
+contrast_type: single
 ```
 
 ### country
@@ -508,8 +514,19 @@ _Optional_: This setting controls the behavior of the indicator config forms. Th
               - complete
               - notstarted
 
-* `repository_link`: This will display a "Go to repository" link on the configuration page. You can enter a pattern with `[id]` and it will be replaced with the indicator id (eg, 1-1-1). For example, on indicator 1-1-1, `https://example.com/[id]` will link to `https://example.com/1-1-1`.
-* `translation_link`: This will display a  "Go to translation" link beneath each metadata field. You can enter a pattern with `[id]` and/or `[field]` and it will be replaced as described above.
+* `repository_link`: This will display a "Go to repository" link on the configuration page. You can enter a pattern with the placeholder `[id]` and it will be replaced with the indicator id (eg, 1-1-1). For example, on indicator 1-1-1, `https://example.com/[id]` will link to `https://example.com/1-1-1`.
+* `translation_link`: This will display a  "Go to translation" link beneath each metadata field. This is used to give the editor a shortcut to whereever it is that the translations are maintained. You can enter a pattern with the placeholder `[id]` it will be replaced as described above. In addition, your pattern can include these other placeholders:
+    * `[language]`: This will be replaced with the current language.
+    * `[group]`: This will be replaced with the first part of the translation key. Eg, if the translation key is `foo.bar` then `[group]` will be replaced with `foo`.
+    * `[key]`: This will be replaced with the second part of the translation key. Eg, if the translation key is `foo.bar` then `[key]` will be replaced with `bar`.
+
+  The appropriate value for this translation_link setting depends on the specifics of how you maintain translations. For example, if your translations are maintained in Weblate then you might take advantage of Weblate's useful search feature, but having a translation_link of:
+
+  `https://hosted.weblate.org/search/my-project/[group]/?q=+context%3A%3D[key]`
+
+  For another example, if you are maintaining translations in the `translations` folder in your data repository, then you might have a translation_link of:
+
+  `https://github.com/my-org/my-data-repo/tree/develop/translations/[language]/[group].yml`
 
 Links to the forms appear in the "Edit" tab on indicator pages.
 
@@ -695,7 +712,7 @@ _Optional_: This setting controls certain aspects of the reporting status page. 
 
 * `title`: Controls the title of the reporting status page. Defaults to "Reporting status".
 * `description`: Controls the introductory text under the title. If omitted there will be no introductory text.
-* `disaggregation_tabs`: Whether or not to display disaggregation status tabs. If omitted, this defaults to false. If you enable this setting, you should also use "expected_disaggregations" in your indicator configuration, in order to provide the disaggregation status report with useful metrics. For more information see [expected_disaggregations](metadata-format.md#recommended-special-fields).
+* `disaggregation_tabs`: Whether or not to display disaggregation status tabs. If omitted, this defaults to false. If you enable this setting, you should also use "expected_disaggregations" in your indicator configuration, in order to provide the disaggregation status report with useful metrics. For more information see [expected_disaggregations](indicator-configuration.md#expected_disaggregations).
 
 Here is an example of using these settings:
 
@@ -707,6 +724,26 @@ reporting_status:
 ```
 
 As always, for multilingual support, the title/description settings can refer to translation keys, and description can include Markdown.
+
+### repository_url_data
+
+_Optional_: This setting specifies the URL of the data repository, which is used in other settings. Currently this -- if available -- will be used as a prefix for the "repository_link" options in `indicator_config_form`, `indicator_metadata_form`, and `indicator_data_form`.
+
+Here is an example of using this setting:
+
+```yaml
+repository_url_data: https://github.com/my-github-org/data
+```
+
+### repository_url_site
+
+_Optional_: This setting specifies the URL of the site repository, which is used in other settings. Currently this -- if available -- will be used as a prefix for the "repository_link" option in `site_config_form`.
+
+Here is an example of using this setting:
+
+```yaml
+repository_url_site: https://github.com/my-github-org/site
+```
 
 ### search_index_boost
 
@@ -750,6 +787,20 @@ _Optional_: This setting can be used to "index" additional metadata fields in yo
 search_index_extra_fields:
   - national_agency
 ```
+
+Another example of how `search_index_extra_fields` could be used, is to configure search terms for indicator pages. For example, if you wanted indicator 3.a.1 to show as a result of 'smoking' or 'smokers' being searched for, you could set an indicator configuration field called `data_keywords` and then "index" that field, like so:
+
+```nohighlight
+search_index_extra_fields:
+  - data_keywords
+```
+
+Then in your indicator configuration you would have:
+
+```nohighlight
+data_keywords: smoking, smokers
+```
+
 
 ### series_toggle
 
