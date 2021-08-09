@@ -22,6 +22,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.3/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
+{% if page.layout == 'config-builder' %}
+<link type="text/css" href="//cdn.jsdelivr.net/npm/alpaca@1.5.27/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet" />
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/alpaca@1.5.27/dist/alpaca/bootstrap/alpaca.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#editor_holder").alpaca({
+    schema: opensdg.configFormSchema,
+    options: opensdg.configFormOptions,
+    data: {},
+  });
+});
+</script>
+{% endif %}
 {% include multilingual-js.html key="general.hide" %}
 {% include multilingual-js.html key="search.search" %}
 <script src='{{ site.baseurl }}/assets/js/sdg.js?v={{ cache_bust }}'></script>
