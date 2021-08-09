@@ -86,95 +86,98 @@
             "items": {
                 "type": "object",
                 "title": "Graph annotation",
-                "allOf": [
-                    { "$ref": "#/definitions/series_unit_constraint" },
-                    {
+                "properties": {
+                    "series": {
+                        "type": "string",
+                        "title": "Series"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "title": "Unit"
+                    },
+                    "value": {
+                        "type": "number",
+                        "title": "Value"
+                    },
+                    "endValue": {
+                        "type": "number",
+                        "title": "End value"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "mode": {
+                        "type": "string",
+                        "title": "Mode",
+                        "enum": ["horizontal", "vertical"]
+                    },
+                    "borderColor": {
+                        "type": "string",
+                        "title": "Line color"
+                    },
+                    "borderDash": {
+                        "type": "string",
+                        "title": "Line dash type"
+                    },
+                    "label": {
+                        "type": "object",
+                        "title": "Label",
                         "properties": {
-                            "value": {
-                                "type": "number",
-                                "title": "Value"
-                            },
-                            "endValue": {
-                                "type": "number",
-                                "title": "End value"
-                            },
-                            "description": {
+                            "position": {
                                 "type": "string",
-                                "title": "Description"
+                                "title": "Position",
+                                "enum": [
+                                    "top",
+                                    "bottom",
+                                    "left",
+                                    "right",
+                                    "center"
+                                ]
                             },
-                            "mode": {
+                            "content": {
                                 "type": "string",
-                                "title": "Mode",
-                                "enum": ["horizontal", "vertical"]
+                                "title": "Content"
                             },
+                            "fontColor": {
+                                "type": "string",
+                                "title": "Label color"
+                            },
+                            "backgroundColor": {
+                                "type": "string",
+                                "default": "#FFFFFFF",
+                                "title": "Background color"
+                            }
+                        }
+                    },
+                    "highContrast": {
+                        "type": "object",
+                        "title": "High contrast options",
+                        "properties": {
                             "borderColor": {
                                 "type": "string",
-                                "title": "Line color"
-                            },
-                            "borderDash": {
-                                "type": "string",
-                                "title": "Line dash type"
+                                "default": "#FFFFFF",
+                                "title": "High-contrast line color"
                             },
                             "label": {
                                 "type": "object",
-                                "title": "Label",
+                                "title": "High contrast label",
                                 "properties": {
-                                    "position": {
-                                        "type": "string",
-                                        "title": "Position",
-                                        "enum": [
-                                            "top",
-                                            "bottom",
-                                            "left",
-                                            "right",
-                                            "center"
-                                        ]
-                                    },
-                                    "content": {
-                                        "type": "string",
-                                        "title": "Content"
-                                    },
                                     "fontColor": {
                                         "type": "string",
-                                        "title": "Label color"
+                                        "default": "#FFFFFF",
+                                        "title": "High-contrast label color"
                                     },
                                     "backgroundColor": {
                                         "type": "string",
-                                        "default": "#FFFFFFF",
-                                        "title": "Background color"
-                                    }
-                                }
-                            },
-                            "highContrast": {
-                                "type": "object",
-                                "title": "High contrast options",
-                                "properties": {
-                                    "borderColor": {
-                                        "type": "string",
-                                        "default": "#FFFFFF",
-                                        "title": "High-contrast line color"
-                                    },
-                                    "label": {
-                                        "type": "object",
-                                        "title": "High contrast label",
-                                        "properties": {
-                                            "fontColor": {
-                                                "type": "string",
-                                                "default": "#FFFFFF",
-                                                "title": "High-contrast label color"
-                                            },
-                                            "backgroundColor": {
-                                                "type": "string",
-                                                "default": "#000000",
-                                                "title": "High-contrast background color"
-                                            }
-                                        }
+                                        "default": "#000000",
+                                        "title": "High-contrast background color"
                                     }
                                 }
                             }
                         }
                     }
-                ]
+                }
             }
         },
         "graph_limits": {
@@ -183,21 +186,24 @@
             "items": {
                 "type": "object",
                 "title": "Graph limit",
-                "allOf": [
-                    { "$ref": "#/definitions/series_unit_constraint" },
-                    {
-                        "properties": {
-                            "minimum": {
-                                "type": "number",
-                                "title": "Minimum"
-                            },
-                            "maximum": {
-                                "type": "number",
-                                "title": "Maximum"
-                            }
-                        }
+                "properties": {
+                    "series": {
+                        "type": "string",
+                        "title": "Series"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "title": "Unit"
+                    },
+                    "minimum": {
+                        "type": "number",
+                        "title": "Minimum"
+                    },
+                    "maximum": {
+                        "type": "number",
+                        "title": "Maximum"
                     }
-                ]
+                }
             }
         },
         "graph_stacked_disaggregation": {
@@ -214,17 +220,20 @@
             "items": {
                 "type": "object",
                 "title": "Graph title",
-                "allOf": [
-                    { "$ref": "#/definitions/series_unit_constraint" },
-                    {
-                        "properties": {
-                            "title": {
-                                "type": "string",
-                                "title": "Title"
-                            }
-                        }
+                "properties": {
+                    "series": {
+                        "type": "string",
+                        "title": "Series"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "title": "Unit"
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
                     }
-                ]
+                }
             }
         },
         "graph_type": {
@@ -262,17 +271,20 @@
             "items": {
                 "type": "object",
                 "title": "Precision rule",
-                "allOf": [
-                    { "$ref": "#/definitions/series_unit_constraint" },
-                    {
-                        "properties": {
-                            "decimals": {
-                                "type": "number",
-                                "title": "Decimals"
-                            }
-                        }
+                "properties": {
+                    "series": {
+                        "type": "string",
+                        "title": "Series"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "title": "Unit"
+                    },
+                    "decimals": {
+                        "type": "number",
+                        "title": "Decimals"
                     }
-                ]
+                }
             }
         },
         "reporting_status": {
@@ -297,20 +309,5 @@
             }
         }
     },
-    "additionalProperties": true,
-    "definitions": {
-        "series_unit_constraint": {
-            "type": "object",
-            "properties": {
-                "series": {
-                    "type": "string",
-                    "title": "Series"
-                },
-                "unit": {
-                    "type": "string",
-                    "title": "Unit"
-                }
-            }
-        }
-    }
+    "additionalProperties": true
 }

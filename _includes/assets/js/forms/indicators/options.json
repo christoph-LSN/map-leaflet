@@ -28,7 +28,8 @@
             "helper": "Whether the indicator should display a Map tab."
         },
         "data_start_values": {
-            "helper": "Disaggregation values for a an indicator to start with already selected"
+            "helper": "Disaggregation values for a an indicator to start with already selected",
+            "toolbarSticky": true
         },
         "embedded_feature_footer": {
             "helper": "A footer that displays below the embedded feature. Only used with either embedded_feature_url or embedded_feature_html."
@@ -50,10 +51,12 @@
             "toolbarSticky": true
         },
         "graph_annotations": {
-            "helper": "This can be used to add line annotations to the graph, such as target lines to show the progress towards the 2030 goal for an indicator."
+            "helper": "This can be used to add line annotations to the graph, such as target lines to show the progress towards the 2030 goal for an indicator.",
+            "toolbarSticky": true
         },
         "graph_limits": {
-            "helper": "A list of min/max limits controlling the lowest/highest values to be shown on the y-axis."
+            "helper": "A list of min/max limits controlling the lowest/highest values to be shown on the y-axis.",
+            "toolbarSticky": true
         },
         "graph_stacked_disaggregation": {
             "helper": "This can be used with the bar graph type to place a certain disaggregation into the same stacked bars."
@@ -62,7 +65,8 @@
             "helper": "The title that displays above the graph/chart."
         },
         "graph_titles": {
-            "helper": "As an alternative to `graph_title`, this can be used to set specific titles for particular units and/or series."
+            "helper": "As an alternative to `graph_title`, this can be used to set specific titles for particular units and/or series.",
+            "toolbarSticky": true
         },
         "graph_type": {
             "helper": "What type of graph to use for the indicator."
@@ -86,7 +90,8 @@
             "helper": "Overrides the normal path of the indicator page. Not recommended, execpt for 'standalone' indicators."
         },
         "precision": {
-            "helper": "Control the number of decimal places for data in this indicator."
+            "helper": "Control the number of decimal places for data in this indicator.",
+            "toolbarSticky": true
         },
         "reporting_status": {
             "helper": "The status of the indicator."
@@ -98,7 +103,8 @@
             "helper": "Whether the indicator is standalone (separate from the SDGs) or not."
         },
         "tags": {
-            "helper": "An optional list of 'tags' to display under an indicator when it is listed on its goal page."
+            "helper": "An optional list of 'tags' to display under an indicator when it is listed on its goal page.",
+            "toolbarSticky": true
         }
     }
 }
