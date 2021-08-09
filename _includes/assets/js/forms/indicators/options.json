@@ -1,1 +1,104 @@
-{}
+{
+    "fields": {
+        "composite_breakdown_label": {
+            "helper": "Used as a label for the COMPOSITE_BREAKDOWN column, if it appears in the indicator data."
+        },
+        "computation_units": {
+            "helper": "Unit of measurement which displays below the indicator chart."
+        },
+        "copyright": {
+            "helper": "Copyright which displays below the indicator chart."
+        },
+        "data_footnote": {
+            "helper": "Footnote which displays below the indicator chart."
+        },
+        "data_non_statistical": {
+            "helper": "Whether the indicator is statistical (can be charted/graphed) or not."
+        },
+        "data_notice_class": {
+            "helper": "A CSS class to apply to the data notice for this indicator."
+        },
+        "data_notice_heading": {
+            "helper": "A title to display above the data notice for this indicator."
+        },
+        "data_notice_text": {
+            "helper": "Text to display as a data notice for this indicator, intended to contain very important information which site viewers must keep in mind when using the data provided."
+        },
+        "data_show_map": {
+            "helper": "Whether the indicator should display a Map tab."
+        },
+        "data_start_values": {
+            "helper": "Disaggregation values for a an indicator to start with already selected"
+        },
+        "embedded_feature_footer": {
+            "helper": "A footer that displays below the embedded feature. Only used with either embedded_feature_url or embedded_feature_html."
+        },
+        "embedded_feature_html": {
+            "helper": "Any HTML to display in another tab, after Chart/Table/etc."
+        },
+        "embedded_feature_tab_title": {
+            "helper": "A title for the embedded feature tab (ie, Chart/Table/[this]). Only used with either embedded_feature_url or embedded_feature_html."
+        },
+        "embedded_feature_title": {
+            "helper": "A title that displays above the embedded feature. Only used with either embedded_feature_url or embedded_feature_html."
+        },
+        "embedded_feature_url": {
+            "helper": "Any URL to display as an iframe in another tab, after Chart/Table/etc."
+        },
+        "expected_disaggregations": {
+            "helper": "An optional list of disaggregations (ie, data column names) to use when calculating the disaggregation status statistics.",
+            "toolbarSticky": true
+        },
+        "graph_annotations": {
+            "helper": "This can be used to add line annotations to the graph, such as target lines to show the progress towards the 2030 goal for an indicator."
+        },
+        "graph_limits": {
+            "helper": "A list of min/max limits controlling the lowest/highest values to be shown on the y-axis."
+        },
+        "graph_stacked_disaggregation": {
+            "helper": "This can be used with the bar graph type to place a certain disaggregation into the same stacked bars."
+        },
+        "graph_title": {
+            "helper": "The title that displays above the graph/chart."
+        },
+        "graph_titles": {
+            "helper": "As an alternative to `graph_title`, this can be used to set specific titles for particular units and/or series."
+        },
+        "graph_type": {
+            "helper": "What type of graph to use for the indicator."
+        },
+        "indicator_available": {
+            "helper": "An optional sub-title for the indicator, which displays below the indicator name. Intended for cases where the available data is slightly different than the indicator name."
+        },
+        "indicator_name": {
+            "helper": "The name for the indicator, which displays at the top of the indicator page."
+        },
+        "indicator_number": {
+            "helper": "The number (or 'id') for the indicator."
+        },
+        "national_geographical_coverage": {
+            "helper": "A label used in the absence of any disaggregation."
+        },
+        "page_content": {
+            "helper": "Content which displays in the main content area of the indicator page."
+        },
+        "permalink": {
+            "helper": "Overrides the normal path of the indicator page. Not recommended, execpt for 'standalone' indicators."
+        },
+        "precision": {
+            "helper": "Control the number of decimal places for data in this indicator."
+        },
+        "reporting_status": {
+            "helper": "The status of the indicator."
+        },
+        "sort": {
+            "helper": "Override the default order in which this indicator is displayed in lists. This can be left blank, and it will be automatically determined."
+        },
+        "standalone": {
+            "helper": "Whether the indicator is standalone (separate from the SDGs) or not."
+        },
+        "tags": {
+            "helper": "An optional list of 'tags' to display under an indicator when it is listed on its goal page."
+        }
+    }
+}
