@@ -292,6 +292,14 @@ var indicatorModel = function (options) {
       headline = helpers.sortData(headline, this.selectedUnit);
     }
 
+    var dataFooter = [];
+    if (filteredData.length > 0) {
+      dataFooter = helpers.getDataFooter(filteredData);
+    }
+    else if (headline.length > 0) {
+      dataFooter = helpers.getDataFooter(headline);
+    }
+
     var combinations = helpers.getCombinationData(this.selectedFields);
     var datasets = helpers.getDatasets(headline, filteredData, combinations, this.years, this.country, this.colors, this.selectableFields, this.colorAssignments);
     var selectionsTable = helpers.tableDataFromDatasets(datasets, this.years);
@@ -328,6 +336,7 @@ var indicatorModel = function (options) {
       chartType: this.graphType,
       indicatorDownloads: this.indicatorDownloads,
       precision: helpers.getPrecision(this.precision, this.selectedUnit, this.selectedSeries),
+      dataFooter: dataFooter,
     });
   };
 };

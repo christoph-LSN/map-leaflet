@@ -152,6 +152,7 @@ hide_single_series: false
 hide_single_unit: false
 ignored_disaggregations:
   - ignored disaggregation column
+  - COMMENT_OBS
 indicator_config_form:
   enabled: true
   dropdowns:

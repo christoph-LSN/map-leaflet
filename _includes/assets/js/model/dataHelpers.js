@@ -118,3 +118,28 @@ function inputEdges(edges) {
   {% endif %}
   return edgesData;
 }
+
+/**
+ * @param {Array} rows
+ * @return {Array} Objects containing 'field' and 'value', to be placed in the footer.
+ */
+function getDataFooter(rows) {
+  if (rows.length === 0) {
+    return [];
+  }
+  var dataFooter = [],
+      footerFields = [
+        'COMMENT_OBS',
+      ],
+      firstRow = rows[0],
+      firstRowKeys = Object.keys(firstRow);
+  footerFields.forEach(function(footerField) {
+    if (firstRowKeys.includes(footerField) && firstRow[footerField]) {
+      dataFooter.push({
+        field: footerField,
+        value: firstRow[footerField],
+      });
+    }
+  });
+  return dataFooter;
+}

@@ -64,6 +64,7 @@ function nonFieldColumns() {
     'Observation status',
     'Unit multiplier',
     'Unit measure',
+    'COMMENT_OBS',
   ];
   if (SERIES_TOGGLE) {
     columns.push(SERIES_COLUMN);

@@ -105,6 +105,7 @@
     getGraphAnnotations: getGraphAnnotations,
     getColumnsFromData: getColumnsFromData,
     inputEdges: inputEdges,
+    getDataFooter: getDataFooter,
     inputData: inputData,
     // Backwards compatibility.
     footerFields: deprecated('helpers.footerFields'),
